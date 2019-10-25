@@ -13,17 +13,17 @@ class Customer {
     $this->password = $password;
     $this->email = $email;
   }
-
+//function for destructing 
    public function __destruct(){
 
    }
-
+//function saveuser
   public function saveUser(){
     $db = mysqli_connect('localhost', 'root', '', 'safetrade');
     $query = "INSERT INTO customers (customerName, username, password, email) VALUES('$this->customerName', '$this->username', '$this->password', '$this->email')";
   	mysqli_query($db, $query);
   }
-
+//function for setting the values
   public function setValues($username){
     $db = mysqli_connect('localhost', 'root', '', 'safetrade');
     $query = "SELECT customerid FROM customers WHERE username == '$username'" ;
