@@ -67,7 +67,7 @@ form, .sectiontitle {
   border: none;
   border-radius: 5px;
 }
-.error {
+.errorclass {
   width: 92%;
   margin: 0px auto;
   padding: 10px;
