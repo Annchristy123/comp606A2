@@ -21,15 +21,15 @@
     <!--input group used as class name as it is vauge
         enough to use for all instances and input was
         better used for input line itself-->
-  	<div class="input-group">
+  	<div class="input">
   		<label>Username</label>
   		<input type="text" name="username" >
   	</div>
-  	<div class="input-group">
+  	<div class="input">
   		<label>Password</label>
   		<input type="password" name="password">
   	</div>
-    <div class="input-group"
+    <div class="input">
     <label>Account Type?</label>
     <select name="accountType">
       <option value="">Select...</option>
@@ -38,7 +38,7 @@
     </select>
   </div>
 
-  	<div class="input-group">
+  	<div class="input">
       <!--Submits form values-->
   		<button type="submit" class="btn" name="login_user">Login</button>
   	</div>
