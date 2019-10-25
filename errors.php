@@ -1,6 +1,7 @@
 <?php
 
 // produces list of contextual error messages
+
 if (count($errors) > 0) : ?>
   <div class="errorclass">
 
