@@ -4,7 +4,9 @@
 <head>
   <!--title of page-->
   <title>Create Customer Account</title>
-  <!--tells page to link to style.css for formating-->
+
+  <!--tells page to link to style.css for  its formating-->
+
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -21,6 +23,7 @@
     <!--input group used as class name as it is vauge
         enough to use for all instances and input was
         better used for input line itself-->
+
     <div class="input">
       	<label>Name</label>
       	<input type="text" name="name">
@@ -42,6 +45,7 @@
   	  <input type="password" name="password_2">
   	</div>
   	<div class="input">
+
       <!--Submits form values-->
   	  <button type="submit" class="btn" name="create_customer">Create Account</button>
   	</div>

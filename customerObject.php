@@ -6,6 +6,8 @@ class Customer {
   private $password;
   private $email;
 
+  //function for constructing the objects
+
   public function __construct($customerName, $username, $password, $email){
     $this->customerName = $customerName;
     $this->username = $username;
