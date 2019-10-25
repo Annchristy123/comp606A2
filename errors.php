@@ -1,5 +1,5 @@
 <?php
-// produces list of contextual error messages for all the forms
+// produces error messages for all the forms
 if (count($errors) > 0) : ?>
   <div class="error">
   	<?php foreach ($errors as $error) : ?>
