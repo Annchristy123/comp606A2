@@ -1,9 +1,9 @@
 <?php
 
-class Tradesman{
+class User{
 
   // private properties of this class 
-  private $tid = null;
+  private $cid = null;
   private $fname = "";
   private $lname = "";
   private $email = "";
@@ -12,8 +12,8 @@ class Tradesman{
   
   
   // constructor to create new user object
-  public function __construct($tid, $fname, $lname,$phone,$email, $password){
-    $this->tid = $tid;
+  public function __construct($cid, $fname, $lname,$phone,$email, $password){
+    $this->cid = $cid;
     $this->fname = $fname;
     $this->lname = $lname;
     $this->email = $email;
@@ -26,45 +26,63 @@ class Tradesman{
     // create a user object and return it otherwise return false;   
     $password=md5($password);//Password encryption
     $result = false;
-    //var_dump(result);
-      $sql = sprintf("insert into tradesmandetails(FirstName, LastName,Phone,Email,Password) values('%s', '%s', '%s','%s', '%s')",  $fname, $lname, $phone,$email, $password);
-      //var_dump(sql);
+    var_dump(result);
+      $sql = sprintf("insert into customerdetails(FirstName, LastName,Phone,Email,Password) values('%s', '%s', '%s','%s', '%s')",  $fname, $lname, $phone,$email, $password);
+      var_dump(sql);
       $qresult = $db->query($sql);
       if ($qresult){
       $cid = $db->insert_id;
-      $user = new Tradesman($tid, $fname, $lname,$phone,$email, $password);      
+      $user = new User($cid, $fname, $lname,$phone,$email, $password);      
       $result = $user;
       $_SESSION['username']=$email;//initialising session
         $_SESSION['firstname']=$fname;
         $_SESSION['lastname']=$lname;
+        $_SESSION['tid']=$cid;
      }    
     return $result;
   }
+
   public static function find($db, $email,$password){
     // search customerdetails table and locate record with id
     // get that record and create user object 
     // return user object OR false if we cannot find it
     $result = false;
     $password=md5($password);
-    $sql = sprintf("select * from tradesmandetails where Email='%s' and Password='%s'", $email,$password);
+    $sql = sprintf("select * from customerdetails where Email='%s' and Password='%s'", $email,$password);
     $qresult = $db->query($sql);
     if ($qresult){
       if ($qresult->num_rows == 1){
         $row = $qresult->fetch_assoc();
-        $user = new Tradesman($row['TId'], $row['FirstName'], $row['LastName'], $row['Phone'],$row['Email'], $row['Password']);
-        $_SESSION['tid']=$row['tid'];//initialising session
-         
-
+        $user = new User($row['CId'], $row['FirstName'], $row['LastName'], $row['Phone'],$row['Email'], $row['Password']);
+        $_SESSION['username']=$email;//initialising session
+         $_SESSION['firstname']=$row['FirstName'];
+         $_SESSION['lastname']=$row['LastName'];
         $result = $user;
       }
     }
     return $result;
   } 
 
+  public static function getAll($db){
+    // get all User and return as a collection of user objects
+    // returns false or a collection of user objects
+    $sql = "select * from customerdetails";
+    $result = $db->query($sql);    
+    $user = false;
+    if ($result){
+      $users = new Collection();
+      while($row = $result->fetch_assoc()){
+        $user = new User($row['CId'], $row['FirstName'], $row['LastName'], $row['Phone'],$row['Email'], $row['Password']);
+        $users->Add($row['cid'], $user);      
+      }    
+    }
+    return $user;    
+  }
+
 
   // ------ setter methods -------
-  public function setTId($tid){
-    $this->$tid = $tid;
+  public function setCId($cid){
+    $this->$cid = $cid;
   }
 
   public function setFName($fname){
@@ -123,7 +141,6 @@ class Tradesman{
     }
     return $result;
   } 
-
   // ------- getter methods ----------
   public function getFName(){    
     return $this->fname;
@@ -132,7 +149,7 @@ class Tradesman{
   public function getLName(){    
     return $this->lname;
   }
-  public function getTId(){
+  public function getCId(){
     return $this->cid;
   }
 
@@ -148,4 +165,17 @@ class Tradesman{
     return $this->password;
   }
   
+  
+  }
+  // method for debugging  object instance
+  public function debug(){
+    echo "<pre><code>";
+    var_dump($this);
+    echo "</code></pre>";
+  }
+
 }
+
+
+
+?>
