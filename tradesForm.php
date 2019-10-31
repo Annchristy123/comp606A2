@@ -100,6 +100,8 @@ input{
                 <input type="password" placeholder="Confirm Password" name="password1">
 
 				<button class="login_button" type="submit">Create Account</button>
+        <a href="tradesForm.php" >Create Tradesman</a>
+        <a href="tradesmanlogin.php" ><<- back to home</a>
 			</div>
 		</form>
 		
