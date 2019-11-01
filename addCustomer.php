@@ -11,11 +11,9 @@ if(!$newUser){
 }
  else {
 
-
     $_SESSION['cid'] = $newUser->getCId();
     $_SESSION['tid'] = '';
     header("Location: custhome.php?cid=".$_SESSION['cid']);//redirecting to user profile  
-
 
 
     
