@@ -10,10 +10,12 @@ if(!$newUser){
     echo "<h2>Failed</h2>";
 }
  else {
-    echo "<h2>New User Created</h2>";
-    echo "<h2>Login Success</h2>";
+
     $_SESSION['cid'] = $newUser->getCId();
     $_SESSION['tid'] = '';
+    header("Location: custhome.php?cid=".$_SESSION['cid']);//redirecting to user profile  
+
+
     
 }
 
