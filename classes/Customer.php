@@ -55,7 +55,7 @@ class Customer{
         $row = $qresult->fetch_assoc();
         $user = new Customer($row['CId'], $row['FirstName'], $row['LastName'], $row['Phone'],$row['Email'], $row['Password']);
         $_SESSION['username']=$email;//initialising session
-         $_SESSION['firstname']=$row['FirstName'];
+         $_SESSION['cid']=$row['Cid'];
          $_SESSION['lastname']=$row['LastName'];
         $result = $user;
       }
