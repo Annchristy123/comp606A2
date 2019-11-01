@@ -95,6 +95,7 @@ input{
 				<input type="text" placeholder="Enter email" name="email" required>
 				<input type="password" placeholder="Enter Password" name="password" required>
 				<button class="login_button" name="login" type="submit">Login</button>
+        <a href="tradesForm.php" >Create Tradesman</a>
 			</div>
 		</form>
 		
