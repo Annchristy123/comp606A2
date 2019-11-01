@@ -95,6 +95,8 @@ input{
 				<input type="text" placeholder="Enter email" name="email" required>
 				<input type="password" placeholder="Enter Password" name="password" required>
 				<button class="login_button" name="login" type="submit">Login</button>
+        <a href="custForm.php" >Create Customer</a>
+        <a href="customerlogin.php" ><<- back to home</a>
 			</div>
 		</form>
 		
