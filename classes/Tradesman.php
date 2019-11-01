@@ -54,7 +54,6 @@ class Tradesman{
         $user = new Tradesman($row['TId'], $row['FirstName'], $row['LastName'], $row['Phone'],$row['Email'], $row['Password']);
         $_SESSION['tid']=$row['tid'];//initialising session
          
-
         $result = $user;
       }
     }
