@@ -15,6 +15,7 @@ if(!$newUser){
     $_SESSION['tid'] = $newUser->getTId();
     header("Location: viewjobtrades.php?tid=".$_SESSION['tid']);//redirecting to user profile  
 
+
     
 }
 

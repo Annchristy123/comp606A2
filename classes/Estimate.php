@@ -6,7 +6,7 @@ class Estimate{
   // private properties of this class 
   private $eid = null;
   private $jid = null;
-  //private $cid = null;
+
   private $tid = null;
   private $mcost = "";
   private $lcost = "";
@@ -16,13 +16,13 @@ class Estimate{
   
   
   // constructor to create new estimate object
-  public function __construct($eid, $jid,$cid,$tid,$mcost, $lcost, $tcost, $expdate,$isaccepted){
+
+  public function __construct($eid, $jid,$tid,$mcost, $lcost, $tcost, $expdate,$isaccepted){
     $this->eid = $eid;
     $this->jid = $jid;
-    //$this->cid = $cid;
     $this->tid = $tid;
-    $this->lcost = $lcost;
     $this->mcost = $mcost;
+    $this->lcost = $lcost;
     $this->tcost = $tcost;
     $this->expdate = $expdate;
     $this->isaccepted=$isaccepted;
@@ -36,12 +36,15 @@ class Estimate{
     $tcost=$lcost+$mcost;
     //echo $tcost;
     $isaccepted=0;
+
     $sql = sprintf("insert into estimatedetails(Tid,Jid,LabourCost,MaterialCost, TotalCost, ExpirationDate,IsAccepted) values('%s', '%s','%s', '%s', '%s', '%s','%s')",  $tid,$jid,$lcost,$mcost ,$tcost, $expdate,$isaccepted);
+
     //echo $sql;
     $qresult = $db->query($sql);
     if ($qresult){
       $eid = $db->insert_id;
       $estimate = new Estimate($eid,$jid,$tid, $lcost,$mcost, $tcost, $expdate,$isaccepted);
+
       $result = $estimate;
     }
     return $result;
@@ -133,3 +136,5 @@ class Estimate{
   }
   
 }
+?>
+

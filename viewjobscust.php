@@ -82,7 +82,6 @@ input{
   <a class="" href="jobform.php">Create Job</a>
   <a class="" href="custhome.php">Home</a>
 
-
 </div>
 <?php
 require_once("headers.php");
