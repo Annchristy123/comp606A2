@@ -30,20 +30,57 @@ class Job{
     // create a user object and return it otherwise return false;   
     $password=md5($password);//Password encryption
     $result = false;
-    var_dump(result);
-      $sql = sprintf("insert into jobdetails(Jobtype, Description,Location,Startdate,Estimatedate,Expectedcost) values('%s', '%s', '%s','%s', '%s','%s')",  $Jobtype, $Description,$Location,$Startdate, $Estimatedate,$Expectedcost);
-      var_dump(sql);
+      $sql = sprintf("insert into jobdetails(Cid,Jobtype, Description,Location,Startdate,Estimatedate,Expectedcost) values('%s','%s', '%s', '%s','%s', '%s','%s')",$_SESSION['cid'], $Jobtype, $Description,$Location,$Startdate, $Estimatedate,$Expectedcost);
       $qresult = $db->query($sql);
       if ($qresult){
-      $cid = $db->insert_id;
-      $user = new Job($jid,$Jobtype, $Description,$Location,$Startdate, $Estimatedate,$Expectedcost);      
+      $jid = $db->insert_id;
+      $user = new Job($jid,$_SESSION['cid'],$Jobtype, $Description,$Location,$Startdate, $Estimatedate,$Expectedcost);      
       $result = $user;
       $_SESSION['jid']=$jid;//initialising session
   
-        $_SESSION['cid']=$cid;
      }    
     return $result;
   }
+
+  public static function getAll($db){
+    // get all jobs and return as a collection of job objects
+    // returns false or a collection of job objects
+    $sql = "select * from jobdetails";
+    $result = $db->query($sql);    
+    //echo $sql;
+    $job = false;
+    if ($result){
+      $jobs = new Collection();
+      while($row = $result->fetch_assoc()){
+        $job =  new Job($row['Jid'],$row['Cid'], $row['Jobtype'], $row['Description'], $row['Location'], $row['Startdate'], $row['Estimatedate'], $row['Expectedcost']);
+        $jobs->Add($row['Jid'], $job); 
+       
+      }    
+    }
+    //var_dump($jobs);
+    return $jobs;    
+  }
+
+  
+  public static function getAllcust($db,$cid){
+    // get all jobs and return as a collection of job objects
+    // returns false or a collection of job objects
+    $sql = sprintf("select * from jobdetails where Cid=%s",$cid);
+    $result = $db->query($sql);    
+    //echo $sql;
+    $job = false;
+    if ($result){
+      $jobs = new Collection();
+      while($row = $result->fetch_assoc()){
+        $job =  new Job($row['Jid'],$row['Cid'], $row['Jobtype'], $row['Description'], $row['Location'], $row['Startdate'], $row['Estimatedate'], $row['Expectedcost']);
+        $jobs->Add($row['Jid'], $job); 
+       
+      }    
+    }
+    //var_dump($jobs);
+    return $jobs;    
+  }
+
   
 
   
@@ -106,6 +143,10 @@ class Job{
   // ------- getter methods ----------
   public function getJobtype(){    
     return $this->Jobtype;
+  }
+
+  public function getJId(){    
+    return $this->jid;
   }
 
   public function getDescription(){    
