@@ -6,5 +6,4 @@ require "classes/Job.php";
 require "classes/Collection";
 
 
-
 ?>
