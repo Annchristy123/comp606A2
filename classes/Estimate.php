@@ -44,5 +44,23 @@ class Estimate{
     }
     return $result;
   }
+  public static function find($db,$jid){
+    // get all jobs and return as a collection of job objects
+    // returns false or a collection of job objects
+    $sql = sprintf("update estimatedetails set IsAccepted=1 where Jid=%s",$jid);
+    $result = $db->query($sql);    
+    //echo $sql;
+    $job = false;
+    if ($result){
+      $jobs = new Collection();
+      while($row = $result->fetch_assoc()){
+        $job =  new Job($row['Jid'],$row['Cid'], $row['Jobtype'], $row['Description'], $row['Location'], $row['Startdate'], $row['Estimatedate'], $row['Expectedcost']);
+        $jobs->Add($row['Jid'], $job); 
+       
+      }    
+    }
+    //var_dump($jobs);
+    return $jobs;    
+  }
 }
   ?>
