@@ -77,8 +77,8 @@ input{
 <body>
 
 <div class="topnav">
-  <a class="" href="viewestimate.php">View Estimate</a>
   <a class="" href="tradesmanlogin.php">Tradesman Logout</a>
+  <a class="" href="viewestimate.php">View Estimate</a>
   <a class="" href="viewjobtrades.php"> View Jobs</a>
 
 </div>

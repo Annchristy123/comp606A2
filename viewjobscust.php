@@ -77,10 +77,11 @@ input{
 <body>
 
 <div class="topnav">
-  <a class="" href="custhome.php">Home</a>
   <a class="" href="customerslogin.php">Customer Logout</a>
   <a class="active" href="viewjobscust.php"> View Jobs</a>
-  <a class="" href="jobForm.php">Create Job</a>
+
+  <a class="" href="jobform.php">Create Job</a>
+  <a class="" href="custhome.php">Home</a>
 
 </div>
 <?php

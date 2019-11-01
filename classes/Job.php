@@ -81,7 +81,6 @@ class Job{
     return $jobs;    
   }
 
-  
 
   
 

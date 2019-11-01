@@ -77,30 +77,31 @@ input{
 <body>
 
 <div class="topnav">
-  <a class="" href="customerslogin.php">Customer Logout</a>
-  <a class="" href="viewjobscust.php"> View Jobs</a>
-  <a class="" href="jobForm.php">Create Job</a>
-  <a class="active" href="custhome.php">Home</a>
-
+  <a class="" href="tradesmanlogin.php">Tradesman Logout</a>
+  <a class="active" href="viewestimates.php">View Estimates</a>
+  <a class="" href="viewjobtrades.php"> View Jobs</a>
 
 </div>
 <?php
 require_once("headers.php");
-$jobs = Job::getAllcust($db,$_SESSION['cid']);
+$estimates = Estimate::getAll($db);
 //var_dump($jobs);
 require_once("footer.php");
 ?>
 
-<?php foreach($jobs->getRecords() as $id => $job){ 
+<?php foreach($estimates->getRecords() as $id => $estimates){ 
      
       ?>
 
+<?php
+//var_dump($job);
+ //echo $job->getJId(); ?>
+        <p>Material Cost: <b><?php echo $estimates->getMcost(); ?></p>
+        <p>Labour Cost: <b><?php echo $estimates->getLcost(); ?></b></p>
+        <p>Total Cost: <b><?php echo $estimates->getTcost(); ?></b></p>
+        <p>Expired Date: <b><?php echo $estimates->getExpdate(); ?></b></p>
+        <p>Is Accepted: <b><?php echo $estimates->getIsaccepted(); ?></b></p>
 
-        <p><?php echo $job->getDescription(); ?></p>
-        <p>Location: <b><?php echo $job->getLocation(); ?></b></p>
-        <p>Cost: <b><?php echo $job->getExpectedcost(); ?></b></p>
-        <p>Date: <b><?php echo $job->getStartdate(); ?></b></p>
-        <p>Estimate Date: <b><?php echo $job->getEstimatedate(); ?></b></p>
        
     <?php }; ?>
 </div>
