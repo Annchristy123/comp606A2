@@ -77,8 +77,10 @@ input{
 <body>
 
 <div class="topnav">
-  <a class="active" href="tradesmanlogin.php">Tradesman Login</a>
-  <a class="" href="customerslogin.php">Customer Login</a>
+  <a class="" href="customerslogin.php">Customer Logout</a>
+  <a class="" href="viewjobscust.php"> View Jobs</a>
+  <a class="active" href="jobForm.php">Create Job</a>
+  <a class="" href="custhome.php">Home</a>
 
 </div>
 
