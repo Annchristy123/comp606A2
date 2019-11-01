@@ -80,6 +80,7 @@ input{
   <a class="" href="custhome.php">Home</a>
   <a class="" href="customerslogin.php">Customer Logout</a>
   <a class="active" href="viewjobscust.php"> View Jobs</a>
+  <a class="" href="jobForm.php">Create Job</a>
 
 </div>
 <?php
@@ -99,7 +100,7 @@ require_once("footer.php");
         <p>Cost: <b><?php echo $job->getExpectedcost(); ?></b></p>
         <p>Date: <b><?php echo $job->getStartdate(); ?></b></p>
         <p>Estimate Date: <b><?php echo $job->getEstimatedate(); ?></b></p>
-       
+        <?php echo "<a href=\"estimatejobcust.php?jid=".$job->getJId()."\">View Estimate</a>";?>
     <?php }; ?>
 </div>
 </div>
