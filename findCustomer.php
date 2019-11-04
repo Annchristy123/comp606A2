@@ -14,6 +14,7 @@ if(!$newUser){
     echo  $_SESSION['cid'];
    header("Location: custhome.php?cid=".$_SESSION['cid']);//redirecting to user profile  
 
+
 }
 
 
