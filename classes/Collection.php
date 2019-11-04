@@ -33,7 +33,6 @@ class Collection {
 
     public function debug(){
         echo "<pre><code>";
-        var_dump($this);
         echo "</code></pre>";
     }
 
