@@ -34,9 +34,8 @@ class Tradesman{
       $cid = $db->insert_id;
       $user = new Tradesman($tid, $fname, $lname,$phone,$email, $password);      
       $result = $user;
-      $_SESSION['username']=$email;//initialising session
-        $_SESSION['firstname']=$fname;
-        $_SESSION['lastname']=$lname;
+      $_SESSION['tid']=$tid;//initialising session
+
      }    
     return $result;
   }
