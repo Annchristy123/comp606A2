@@ -13,7 +13,6 @@ session_start();
   <style>
     body {
       font-size: 100%;
-      background-image: url("massage.jpg");
       background-repeat: no-repeat;
       background-size: cover;
       font-family: Arial, Helvetica, sans-serif;
@@ -112,10 +111,7 @@ session_start();
         <li class="nav-item ">
           <a class="nav-link" href="viewjobtrades.php"> View Jobs</a>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link" href="viewestimate.php">View Estimate</a>
-
-        </li>
+  
         <li class="nav-item">
           <a class="nav-link" href="tradesmanlogin.php">Tradesman Logout</a>
         </li>
@@ -137,8 +133,11 @@ session_start();
     <form action="addEstimate.php" method="post">
 
       <div class="main-form estimate-form">
+      <label for="staticEmail" class="col-sm-2 col-form-label">LabourCost:</label> 
         <input class="form-control" type="text" placeholder="Labour Cost" name="LabourCost" required>
+        <label for="staticEmail" class="col-sm-2 col-form-label">MaterialCost:</label> 
         <input class="form-control" type="text" placeholder="Material Cost" name="MaterialCost">
+        <label for="staticEmail" class="col-sm-2 col-form-label">ExpirationDate:</label> 
         <input class="form-control" type="date" placeholder="ExpirationDate" name="ExpirationDate">
         <button class="post-button btn btn-primary" type="submit">Post Estimate</button>
         <input type="hidden" name="jid" value="<?php echo $_GET['jid']; ?>">

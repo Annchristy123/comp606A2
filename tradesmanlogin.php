@@ -84,6 +84,9 @@ session_start();
       margin: 8px;
       border-radius: 0px;
     }
+    #divCheckbox{
+      color:red;
+    }
 
     .login-button {
       border-radius: 0px !important;
@@ -140,13 +143,15 @@ session_start();
     <center>
       <h2>Tradesman Login</h2>
     </center>
+    <div id="divCheckbox" style="display: none;">All fields are required</div>
+
 
     <form action="findtradesman.php" method="post">
 
       <div class="main-form form-group tradesman-login">
         <input type="text" class="form-control" placeholder="Enter email" name="email" required>
         <input type="password" class="form-control" placeholder="Enter Password" name="password" required>
-        <button class="btn btn-primary login-button" name="login" type="submit">Login</button>
+        <button class="btn btn-primary login-button" name="login" id="idsubmit" type="submit">Login</button>
         <a href="tradesForm.php" class="create-tradesman">Create Tradesman</a>
       </div>
     </form>
@@ -154,5 +159,28 @@ session_start();
   </div>
 
 </body>
+<script>
+
+
+$('#idsubmit').on('click',function(e){
+
+   var email = $("input[name=email").val()
+   var password = $("input[name=password").val()
+
+
+  if(!email&&!password){
+
+    $("#divCheckbox").css('display','block');
+
+    return false;
+  }
+  else{
+    return true
+  }
+ });
+
+
+</script>
+
 
 </html>

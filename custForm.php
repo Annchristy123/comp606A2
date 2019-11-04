@@ -13,7 +13,6 @@ session_start();
   <style>
     body {
       font-size: 100%;
-      background-image: url("massage.jpg");
       background-repeat: no-repeat;
       background-size: cover;
       font-family: Arial, Helvetica, sans-serif;

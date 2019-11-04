@@ -13,7 +13,6 @@ session_start();
   <style>
     body {
       font-size: 100%;
-      background-image: url("massage.jpg");
       background-repeat: no-repeat;
       background-size: cover;
       font-family: Arial, Helvetica, sans-serif;
@@ -99,7 +98,7 @@ session_start();
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link active" href="viewestimates.php">View Estimates</a>
+          <a class="nav-link active" href="viewestimatestrad.php">View Estimates</a>
         </li>
         <li class="nav-item ">
           <a class="nav-link" href="viewjobtrades.php"> View Jobs</a>

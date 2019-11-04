@@ -13,7 +13,6 @@ session_start();
   <style>
     body {
       font-size: 100%;
-      background-image: url("massage.jpg");
       background-repeat: no-repeat;
       background-size: cover;
       font-family: Arial, Helvetica, sans-serif;
@@ -155,6 +154,4 @@ session_start();
         <input type="password" class="form-control" placeholder="Confirm Password" name="password1">
 
         <button class="btn btn-primary login-button" type="submit">Create Account</button>
-        <a href="tradesForm.php" class="login-tradesman">Create Tradesman</a>
-        <a href="tradesmanlogin.php" class="login-tradesman">
-          <<- back to home</a> </div> </form> </div> </body> </html>
+        </div> </form> </div> </body> </html>

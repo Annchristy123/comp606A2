@@ -95,7 +95,7 @@ session_start();
           <a class="nav-link" href="viewjobtrades.php"> View Jobs</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="viewestimates.php">View Estimates</a>
+          <a class="nav-link" href="viewestimatestrad.php">View Estimates</a>
         </li>
         <li class="nav-item ">
           <a class="nav-link" href="tradesmanlogin.php">Tradesman Logout</a>

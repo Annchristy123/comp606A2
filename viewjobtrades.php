@@ -128,7 +128,7 @@ session_start();
   //var_dump($jobs);
   require_once("footer.php");
   ?>
-
+<h1>Tradesman Dashboard</h1>
   <div class="table-container">
     <table class="table jobs-table table-striped table-bordered">
       <thead>
@@ -143,6 +143,7 @@ session_start();
         </tr>
       </thead>
       <tbody>
+
         <?php foreach ($jobs->getRecords() as $id => $job) {
 
           ?>

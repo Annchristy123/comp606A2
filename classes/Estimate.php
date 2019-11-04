@@ -17,9 +17,7 @@ class Estimate{
   
   
   // constructor to create new estimate object
-
   public function __construct($eid, $jid,$tid, $lcost,$mcost, $tcost, $expdate,$isaccepted){
-
     $this->eid = $eid;
     $this->jid = $jid;
     //$this->cid = $cid;
@@ -40,9 +38,7 @@ class Estimate{
     //echo $tcost;
     $isaccepted=0;
     $sql = sprintf("insert into estimatedetails(Tid,Jid,LabourCost,MaterialCost, TotalCost, ExpirationDate,IsAccepted) values('%s', '%s','%s', '%s', '%s', '%s','%s')",  $tid,$jid,$lcost,$mcost ,$tcost, $expdate,$isaccepted);
-
     echo $sql;
-
     $qresult = $db->query($sql);
     if ($qresult){
      $eid = $db->insert_id;

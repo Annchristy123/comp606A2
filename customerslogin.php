@@ -106,10 +106,14 @@ session_start();
       vertical-align: baseline;
 
     }
+    #divCheckbox{
+      color:red;
+    }
   </style>
 </head>
 
 <body>
+
   <div class="topnav">
 
 
@@ -145,12 +149,15 @@ session_start();
       <h2>Customer Login</h2>
     </center>
 
+    <div id="divCheckbox" style="display: none;">All fields are required</div>
+
+
     <form action="findCustomer.php" method="post">
 
       <div class="main-form customer-login">
         <input type="text" class="form-control" placeholder="Enter email" name="email" required>
         <input type="password" class="form-control" placeholder="Enter Password" name="password" required>
-        <button class="login-buttonbtn btn-primary login-button" name="login" type="submit">Login</button>
+        <button class="login-buttonbtn btn-primary login-button" name="login" type="submit"   id='idsubmit'>Login</button>
         <a href="custForm.php" class="login-customer">Create Customer</a>
 
       </div>
@@ -159,5 +166,31 @@ session_start();
   </div>
 
 </body>
+<script src="jquery-3.4.1.min.js"></script>
+
+
+<script>
+
+
+$('#idsubmit').on('click',function(e){
+
+   var email = $("input[name=email").val()
+   var password = $("input[name=password").val()
+
+
+  if(!email&&!password){
+
+    $("#divCheckbox").css('display','block');
+
+    return false;
+  }
+  else{
+    return true
+  }
+ });
+
+
+</script>
+
 
 </html>

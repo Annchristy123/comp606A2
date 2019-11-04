@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 ?>
@@ -152,11 +151,11 @@ session_start();
         <?php
 
 
-          if ($estimate->getIsAccepted() == 0) {
+          if ($estimate->getIsAccepted() > 0) {
             ?>
           <button class="login_button" type="submit">Accept</button>
         <?php
-          } elseif ($estimate->getIsAccepted() == 1) {
+          } else {
             //echo "Accepted";
           }
 

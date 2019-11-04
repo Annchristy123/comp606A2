@@ -13,7 +13,6 @@ session_start();
   <style>
     body {
       font-size: 100%;
-      background-image: url("massage.jpg");
       background-repeat: no-repeat;
       background-size: cover;
       font-family: Arial, Helvetica, sans-serif;
@@ -97,6 +96,10 @@ session_start();
       box-shadow: 1px 1px 9px 5px #ddd;
       padding: 50px 10px;
     }
+    #divCheckbox{
+
+      color:red;
+    }
 
     /* .login-tradesman {
       color: #777;
@@ -142,23 +145,60 @@ session_start();
     <center>
       <h2>Job Form</h2>
     </center>
+    <div id="divCheckbox" style="display: none;">All fields are required</div>
 
-    <form action="addJob.php" method="post">
+    <form action="addJob.php" method="post" id='jobForm'>
 
       <div class="main-form jobform">
-        <input class="form-control" type="text" placeholder="Jobtype" name="Jobtype" required>
+      <div class="form-group">
+      <label for="staticEmail" class="col-sm-2 col-form-label">JobType:</label> 
+             <input class="form-control" type="text" placeholder="Jobtype" name="Jobtype" >
+             <span></span>
+      </div>
+     
+             <label for="staticEmail" class="col-sm-2 col-form-label">Description</label> 
         <input class="form-control" type="text" placeholder="Description" name="Description">
+        <label for="staticEmail" class="col-sm-2 col-form-label">Location</label> 
         <input class="form-control" type="text" placeholder="Location" name="Location">
+        <label for="staticEmail" class="col-sm-2 col-form-label">StartDate</label> 
         <input class="form-control" type="date" placeholder="Startdate" name="Startdate">
+        <label for="staticEmail" class="col-sm-2 col-form-label">EstimateDate</label> 
         <input class="form-control" type="date" placeholder="Estimatedate" name="Estimatedate">
+        <label for="staticEmail" class="col-sm-2 col-form-label">ExpectedCost</label> 
         <input class="form-control" type="text" placeholder="ExpectedCost" name="Expectedcost">
 
-        <button class="login-button btn btn-primary" type="submit">Create Job</button>
+        <button class="login-button btn btn-primary" id='idsubmit' type="submit">Create Job</button>
       </div>
     </form>
 
   </div>
 
 </body>
+
+<script src="jquery-3.4.1.min.js"></script>
+
+
+<script>
+
+
+$('#idsubmit').on('click',function(e){
+
+   var jobtype = $("input[name=Jobtype").val()
+   var desc = $("input[name=Description").val()
+
+
+  if(!jobtype&&!desc){
+
+    $("#divCheckbox").css('display','block');
+
+    return false;
+  }
+  else{
+    return true
+  }
+ });
+
+
+</script>
 
 </html>
