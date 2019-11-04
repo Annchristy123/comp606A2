@@ -13,7 +13,6 @@ if(!$newUser){
  else {
     header("Location: viewjobtrades.php?tid=".$_SESSION['tid']);//redirecting to user profile  
 
-
     
 }
 
