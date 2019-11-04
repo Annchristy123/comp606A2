@@ -1,6 +1,7 @@
 <?php
 
-class Job{
+class Job
+{
 
   // private properties of this class 
   private $jid = null;
@@ -11,10 +12,11 @@ class Job{
   private $Startdate = null;
   private $Estimatedate = null;
   private $Expectedcost = null;
-  
-  
+
+
   // constructor to create new user object
-  public function __construct($jid,$cid, $Jobtype, $Description,$Location,$Startdate, $Estimatedate,$Expectedcost){
+  public function __construct($jid, $cid, $Jobtype, $Description, $Location, $Startdate, $Estimatedate, $Expectedcost)
+  {
     $this->jid = $jid;
     $this->cid = $cid;
     $this->Jobtype = $Jobtype;
@@ -25,146 +27,218 @@ class Job{
     $this->Expectedcost = $Expectedcost;
   }
 
-  public static function create($db, $Jobtype, $Description,$Location,$Startdate, $Estimatedate,$Expectedcost){
+  public static function create($db, $Jobtype, $Description, $Location, $Startdate, $Estimatedate, $Expectedcost)
+  {
     // create a new user record in jobdetails table and if successful 
     // create a user object and return it otherwise return false;   
-    $password=md5($password);//Password encryption
+    $password = md5($password); //Password encryption
     $result = false;
-
-      $sql = sprintf("insert into jobdetails(Cid,Jobtype, Description,Location,Startdate,Estimatedate,Expectedcost) values('%s','%s', '%s', '%s','%s', '%s','%s')",$_SESSION['cid'], $Jobtype, $Description,$Location,$Startdate, $Estimatedate,$Expectedcost);
-      $qresult = $db->query($sql);
-      if ($qresult){
+    $sql = sprintf("insert into jobdetails(Cid,Jobtype, Description,Location,Startdate,Estimatedate,Expectedcost) values('%s','%s', '%s', '%s','%s', '%s','%s')", $_SESSION['cid'], $Jobtype, $Description, $Location, $Startdate, $Estimatedate, $Expectedcost);
+    $qresult = $db->query($sql);
+    if ($qresult) {
       $jid = $db->insert_id;
-      $user = new Job($jid,$_SESSION['cid'],$Jobtype, $Description,$Location,$Startdate, $Estimatedate,$Expectedcost);      
+      $user = new Job($jid, $_SESSION['cid'], $Jobtype, $Description, $Location, $Startdate, $Estimatedate, $Expectedcost);
       $result = $user;
-      $_SESSION['jid']=$jid;//initialising session
-  
-     }    
+      $_SESSION['jid'] = $jid; //initialising session
+
+    }
     return $result;
   }
+  public static function edit($db, $jid, $Jobtype, $Description, $Location, $Startdate, $Estimatedate, $Expectedcost)
+  {
+    // edit an estimate record in estimatedetails table and if successful 
+    // create a estimate object and return it otherwise return false;
+    $result = false;
+    $sql1 = sprintf("select * from jobdetails where Jid=%s", $jid);
+    $qresult1 = $db->query($sql1);
+    if ($qresult1) {
+      if ($qresult1->num_rows == 1) {
+        $row = $qresult1->fetch_assoc();
+        $cid = $row['Cid'];
+      }
+    }
+    $sql = sprintf("update jobdetails set Jobtype='%s', Description='%s', Location='%s', Startdate='%s', Estimatedate='%s', Expectedcost='%s' where Jid='%s'",  $Jobtype, $Description, $Location, $Startdate, $Estimatedate, $Expectedcost, $jid);
+    $qresult = $db->query($sql);
+    if ($qresult) {
 
-  public static function getAll($db){
+      $job = new Job($jid, $cid, $Jobtype, $Description, $Location, $Startdate, $Estimatedate, $Expectedcost);
+      $result = $job;
+    }
+
+    return $result;
+  }
+  public static function find($db, $jid)
+  {
+
+    $sql = sprintf("select * from jobdetails where jid=%s", $jid);
+    $result = $db->query($sql);
+    $job = false;
+    if ($result) {
+
+      while ($row = $result->fetch_assoc()) {
+        $job =  new Job($row['Jid'], $row['Cid'], $row['Jobtype'], $row['Description'], $row['Location'], $row['Startdate'], $row['Estimatedate'], $row['Expectedcost']);
+      }
+    }
+    //var_dump($jobs);
+    return $job;
+  }
+  public static function delete($db, $jid)
+  {
+
+    $sql = sprintf("delete from jobdetails where jid=%s", $jid);
+    $result = $db->query($sql);
+    $job = false;
+    if ($result) {
+      $job = true;
+    }
+
+    //var_dump($jobs);
+    return $job;
+  }
+
+
+  public static function getAll($db)
+  {
     // get all jobs and return as a collection of job objects
     // returns false or a collection of job objects
     $sql = "select * from jobdetails";
-    $result = $db->query($sql);    
+    //echo $sql;
+    $result = $db->query($sql);
     //echo $sql;
     $job = false;
-    if ($result){
+    if ($result) {
       $jobs = new Collection();
-      while($row = $result->fetch_assoc()){
-        $job =  new Job($row['Jid'],$row['Cid'], $row['Jobtype'], $row['Description'], $row['Location'], $row['Startdate'], $row['Estimatedate'], $row['Expectedcost']);
-        $jobs->Add($row['Jid'], $job); 
-       
-      }    
+      while ($row = $result->fetch_assoc()) {
+        $job =  new Job($row['Jid'], $row['Cid'], $row['Jobtype'], $row['Description'], $row['Location'], $row['Startdate'], $row['Estimatedate'], $row['Expectedcost']);
+        $jobs->Add($row['Jid'], $job);
+      }
     }
     //var_dump($jobs);
-    return $jobs;    
+    return $jobs;
   }
 
-  
-  public static function getAllcust($db,$cid){
+
+  public static function getAllcust($db, $cid)
+  {
     // get all jobs and return as a collection of job objects
     // returns false or a collection of job objects
-    $sql = sprintf("select * from jobdetails where Cid=%s",$cid);
-    $result = $db->query($sql);    
+    $sql = sprintf("select * from jobdetails where Cid=%s", $cid);
     //echo $sql;
+    $result = $db->query($sql);
+
     $job = false;
-    if ($result){
+    if ($result) {
       $jobs = new Collection();
-      while($row = $result->fetch_assoc()){
-        $job =  new Job($row['Jid'],$row['Cid'], $row['Jobtype'], $row['Description'], $row['Location'], $row['Startdate'], $row['Estimatedate'], $row['Expectedcost']);
-        $jobs->Add($row['Jid'], $job); 
-       
-      }    
+      while ($row = $result->fetch_assoc()) {
+        $job =  new Job($row['Jid'], $row['Cid'], $row['Jobtype'], $row['Description'], $row['Location'], $row['Startdate'], $row['Estimatedate'], $row['Expectedcost']);
+        $jobs->Add($row['Jid'], $job);
+      }
     }
     //var_dump($jobs);
-    return $jobs;    
+    return $jobs;
   }
 
-  
+
+
+
+
+
 
   // ------ setter methods -------
-  public function setJId($jid){
+  public function setJId($jid)
+  {
     $this->$jid = $jid;
   }
-  public function setCId($cid){
+  public function setCId($cid)
+  {
     $this->$cid = $cid;
   }
-  public function setJobtype($Jobtype){
+  public function setJobtype($Jobtype)
+  {
     $result = true;
-    if (is_string($Jobtype)){
+    if (is_string($Jobtype)) {
       $this->Jobtype = $Jobtype;
     } else $result = false;
     return $result;
   }
 
-  public function setDescription($Description){
+  public function setDescription($Description)
+  {
     $result = true;
-    if (is_string($Description)){
+    if (is_string($Description)) {
       $this->Description = $Description;
     } else $result = false;
     return $result;
   }
- 
 
-    public function setLocation($Location){
+
+  public function setLocation($Location)
+  {
     $result = true;
-    if (is_string($Location)){
-        $this->Location = $Location;
-      } else $result = false;
- 
+    if (is_string($Location)) {
+      $this->Location = $Location;
+    } else $result = false;
+
     return $result;
   }
 
-  public function setStartdate($Startdate){
+  public function setStartdate($Startdate)
+  {
     $result = true;
-    if (is_string($Startdate)){
-        $this->Startdate = $Startdate;
-      } else $result = false;
+    if (is_string($Startdate)) {
+      $this->Startdate = $Startdate;
+    } else $result = false;
     return $result;
-  } 
-  public function setEstimatedate($Estimatedate){
+  }
+  public function setEstimatedate($Estimatedate)
+  {
     $result = true;
-    if (is_string($Estimatedate)){
-        $this->Estimatedate = $Estimatedate;
-      } else $result = false;
+    if (is_string($Estimatedate)) {
+      $this->Estimatedate = $Estimatedate;
+    } else $result = false;
     return $result;
-  } 
-  public function setExpectedcost($Expectedcost){
+  }
+  public function setExpectedcost($Expectedcost)
+  {
     $result = true;
-    if (is_string($Expectedcost)){
-        $this->Expectedcost = $Expectedcost;
-      } else $result = false;
+    if (is_string($Expectedcost)) {
+      $this->Expectedcost = $Expectedcost;
+    } else $result = false;
     return $result;
-  } 
+  }
 
   // ------- getter methods ----------
-  public function getJobtype(){    
+  public function getJobtype()
+  {
     return $this->Jobtype;
   }
 
-  public function getJId(){    
+  public function getJId()
+  {
     return $this->jid;
   }
 
-  public function getDescription(){    
+  public function getDescription()
+  {
     return $this->Description;
   }
-  public function getLocation(){
+  public function getLocation()
+  {
     return $this->Location;
   }
 
-  public function getStartdate(){
+  public function getStartdate()
+  {
     return $this->Startdate;
   }
 
-  public function getEstimatedate(){
+  public function getEstimatedate()
+  {
     return $this->Estimatedate;
   }
 
-  public function getExpectedcost(){
+  public function getExpectedcost()
+  {
     return $this->Expectedcost;
   }
-  
 }
