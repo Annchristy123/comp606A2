@@ -33,9 +33,11 @@ class Job
     // create a user object and return it otherwise return false;   
     $password = md5($password); //Password encryption
     $result = false;
+
     $sql = sprintf("insert into jobdetails(Cid,Jobtype, Description,Location,Startdate,Estimatedate,Expectedcost) values('%s','%s', '%s', '%s','%s', '%s','%s')", $_SESSION['cid'], $Jobtype, $Description, $Location, $Startdate, $Estimatedate, $Expectedcost);
     $qresult = $db->query($sql);
     if ($qresult) {
+
       $jid = $db->insert_id;
       $user = new Job($jid, $_SESSION['cid'], $Jobtype, $Description, $Location, $Startdate, $Estimatedate, $Expectedcost);
       $result = $user;
@@ -137,11 +139,6 @@ class Job
     //var_dump($jobs);
     return $jobs;
   }
-
-
-
-
-
 
 
   // ------ setter methods -------

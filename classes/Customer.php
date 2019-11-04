@@ -59,10 +59,12 @@ class Customer
     if ($qresult) {
       if ($qresult->num_rows == 1) {
         $row = $qresult->fetch_assoc();
+
         $user = new Customer($row['Cid'], $row['FirstName'], $row['LastName'], $row['Phone'], $row['Email'], $row['Password']);
         $_SESSION['username'] = $email; //initialising session
         $_SESSION['cid'] = $row['Cid'];
         $_SESSION['lastname'] = $row['LastName'];
+
         $result = $user;
       }
     }

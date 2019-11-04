@@ -92,7 +92,6 @@ session_start();
     }
   </style>
 </head>
-
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">SafeTrade</a>
@@ -137,7 +136,7 @@ session_start();
       </thead>
       <tbody>
         <?php foreach ($jobs->getRecords() as $id => $job) {
-
+          
           ?>
           <tr>
             <td scope="row"><?php echo $job->getDescription(); ?></td>
